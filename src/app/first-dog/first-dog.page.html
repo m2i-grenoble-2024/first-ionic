@@ -1,11 +1,22 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>FirstDog</ion-title>
+    
+    <ion-buttons slot="end">
+      <ion-button (click)="showForm = true">
+        <ion-icon icon="create-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-card>
+
+  <app-dog-form [toEdit]="dog" *ngIf="showForm"></app-dog-form>
+  
+
+  <ion-card *ngIf="!showForm">
     <ion-card-header>
       <ion-card-title>{{dog.name}}</ion-card-title>
       <ion-card-subtitle>{{dog.breed}}</ion-card-subtitle>
