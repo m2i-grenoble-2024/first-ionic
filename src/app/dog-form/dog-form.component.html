@@ -1,3 +1,9 @@
-<p>
-  Contenu de l'input : {{toEdit.name}}
-</p>
+
+<ion-input label="Name" [(ngModel)]="toEdit.name"></ion-input>
+<ion-input label="Breed" [(ngModel)]="toEdit.breed"></ion-input>
+<ion-datetime-button datetime="picker" ></ion-datetime-button>
+<ion-modal [keepContentsMounted]="true">
+  <ng-template>
+    <ion-datetime id="picker" presentation="date" [(ngModel)]="toEdit.birthdate"></ion-datetime>
+  </ng-template>
+</ion-modal>
