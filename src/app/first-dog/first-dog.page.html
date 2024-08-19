@@ -3,8 +3,11 @@
     <ion-title>FirstDog</ion-title>
     
     <ion-buttons slot="end">
-      <ion-button (click)="showForm = !showForm">
+      <ion-button *ngIf="!showForm" (click)="showForm = true">
         <ion-icon icon="create-outline"></ion-icon>
+      </ion-button>
+      <ion-button *ngIf="showForm" (click)="showForm = false">
+        Cancel
       </ion-button>
     </ion-buttons>
 
