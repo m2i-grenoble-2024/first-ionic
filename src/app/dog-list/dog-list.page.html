@@ -7,8 +7,30 @@
 <ion-content [fullscreen]="true">
   <!-- Nouvelle syntaxe des for -->
   @for (item of dogs; track item.id) {
-    <app-dog-card [dog]="item"></app-dog-card>
+  <app-dog-card [dog]="item"></app-dog-card>
   }
+
+  <ion-fab horizontal="end" vertical="bottom" slot="fixed">
+    <ion-fab-button id="open-modal">
+      <ion-icon icon="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-modal #modal trigger="open-modal">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Add Dog</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="modal.dismiss()">Cancel</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content>
+        <!-- <app-dog-form></app-dog-form> -->
+      </ion-content>
+    </ng-template>
+  </ion-modal>
 
   <!-- Syntaxe historique. Y en a pas une mieux que l'autre, question de préférence -->
   <!-- <app-dog-card [dog]="item" *ngFor="let item of dogs"></app-dog-card> -->
