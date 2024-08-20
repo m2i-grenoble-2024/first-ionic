@@ -16,7 +16,7 @@
 
 <ion-content [fullscreen]="true">
 
-  <app-dog-form [toEdit]="dog" *ngIf="showForm"></app-dog-form>
+  <app-dog-form (apply)="showForm = false" [toEdit]="dog" *ngIf="showForm"></app-dog-form>
   
   <app-dog-card [dog]="dog" *ngIf="!showForm"></app-dog-card>
 </ion-content>
