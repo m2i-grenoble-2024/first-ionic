@@ -1,0 +1,15 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>DogList</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <!-- Nouvelle syntaxe des for -->
+  @for (item of dogs; track item.id) {
+    <app-dog-card [dog]="item"></app-dog-card>
+  }
+
+  <!-- Syntaxe historique. Y en a pas une mieux que l'autre, question de préférence -->
+  <!-- <app-dog-card [dog]="item" *ngFor="let item of dogs"></app-dog-card> -->
+</ion-content>

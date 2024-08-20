@@ -20,5 +20,4 @@ export class DogFormComponent  implements OnInit {
   constructor() { }
 
   ngOnInit() {}
-
 }
