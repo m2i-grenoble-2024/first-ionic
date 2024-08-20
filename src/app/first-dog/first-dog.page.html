@@ -18,15 +18,5 @@
 
   <app-dog-form [toEdit]="dog" *ngIf="showForm"></app-dog-form>
   
-
-  <ion-card *ngIf="!showForm">
-    <ion-card-header>
-      <ion-card-title>{{dog.name}}</ion-card-title>
-      <ion-card-subtitle>{{dog.breed}}</ion-card-subtitle>
-    </ion-card-header>
-  
-    <ion-card-content>
-      {{dog.birthdate|date:'dd/MM/yyyy'}}
-    </ion-card-content>
-  </ion-card>
+  <app-dog-card [dog]="dog" *ngIf="!showForm"></app-dog-card>
 </ion-content>
