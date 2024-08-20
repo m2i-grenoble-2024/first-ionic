@@ -49,6 +49,71 @@ Exemple:
 ```ts
 export class ChildComponent {
     @Ouput()
-    
+    validate = new EventEmitter();
+    @Output()
+    cancel = new EventEmitter();
 
 }
+```
+Le template du Child
+```html
+<p>Voulez-vous vraiment faire ça ?</p>
+<button (click)="validate.emit()">Valider</button>
+<button (click)="cancel.emit()">Annuler</button>
+```
+
+Côté Parent
+```ts
+export class ParentComponent {
+
+    handleValidate() {
+        console.log('ok on valide !')
+    }
+
+    handleDelete() {
+        alert('hola non')
+    }
+}
+```
+Template du Parent
+```html
+<app-child (validate)="handleValidate()" (cancel)="handleCancel()"></app-child>
+```
+
+Ici donc, l'enfant défini 2 events/output un où on valide, un où on annule, mais ce n'est pas l'enfant qui dit ce qui se passe dans un cas ou dans l'autre, il se contente d'emit un event qui sera intercepté par le parent et c'est le parent qui indique ce qu'il faudra exécuter en cas de validation ou d'annulation (ici avec des méthodes appelées handleValidate/handleCancel, mais elles pourraient s'appeler comme on veut)
+
+
+### Les appels HTTP (via HttpClient)
+
+Angular integre un composant HttpClient qui permet de réaliser des requêtes HTTP depuis le typescript (c'est globalement l'équivalent de fetch ou de axios, mais à la sauce angular).
+
+En règle général, on regroupe les appels Http dans des services dédiés (un peu comme on regroupe les requêtes SQL dans des repository côté back).
+
+Pour pouvoir utiliser le HttpClient dans des projets standalone (qui n'ont pas de module), on doit rajouter dans le [main.ts](src/main.ts), dans la liste des providers un `provideHttpClient()`
+
+Ensuite pour pouvoir utiliser ce client, on doit l'injecter via le constructor du service où on s'en servira 
+```ts
+constructor(private http:HttpClient){}
+```
+On crée des méthodes dans notre service pour les différentes requêtes HTTP qu'on souhaite faire vers notre API
+
+Exemple d'un fetchAll (en remplaçant `Entity` par le nom de l'entité qu'on récupère)
+```ts
+fetchAll() {
+    return this.http.get<Entity[]>('lien-vers-le-backend');
+}
+```
+
+Pour l'utiliser dans un component, on devra injecter le service via le constructor comme pour le HttpClient
+
+```ts
+constructor(private monService:MonService){}
+```
+
+Et ensuite on appel notre méthode là où on en a besoin en rajoutant bien un subscribe() pour lancer effectivement la requête et pour indiquer ce qu'on souhaite faire avec le résultat dans le component.
+
+Exemple :
+
+```ts
+this.monService.fetchAll().subscribe(data => this.prop = data);
+```
