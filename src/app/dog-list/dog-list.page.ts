@@ -22,6 +22,12 @@ export class DogListPage implements OnInit {
 
   dogs:Dog[] = [];
 
+  addDog:Dog = {
+    name:'',
+    breed:'',
+    birthdate: '2024-01-01'
+  }
+
   constructor(private dogService:DogService) {
     addIcons({add})
 
@@ -29,6 +35,10 @@ export class DogListPage implements OnInit {
 
   ngOnInit() {
     this.dogService.fetchAll().subscribe(data => this.dogs = data);
+  }
+
+  postDog() {
+    this.dogService.add(this.addDog).subscribe(data => this.dogs.push(data));
   }
 
 }

@@ -27,7 +27,7 @@
         </ion-toolbar>
       </ion-header>
       <ion-content>
-        <!-- <app-dog-form></app-dog-form> -->
+        <app-dog-form [toEdit]="addDog" (apply)="postDog(); modal.dismiss()"></app-dog-form>
       </ion-content>
     </ng-template>
   </ion-modal>

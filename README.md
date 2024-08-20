@@ -18,7 +18,7 @@ export class ParentComponent {
 Le template du parent
 ```html
 <!-- On peut appeler plusieurs fois le component ChildComponent en lui donnant
- des valeurs différents dans son input -->
+ des valeurs différents dans sohttp:HttpClientn input -->
     <app-child [firstName]="person.firstName"></app-child>
     <app-child firstName="Camilla"></app-child>
     <app-child firstName="Nuri"></app-child>

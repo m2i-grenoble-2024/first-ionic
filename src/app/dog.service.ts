@@ -12,4 +12,9 @@ export class DogService {
   fetchAll() {
     return this.http.get<Dog[]>('http://localhost:8000/api/dog');
   }
+
+
+  add(dog:Dog) {
+    return this.http.post<Dog>('http://localhost:8000/api/dog', dog);
+  }
 }
