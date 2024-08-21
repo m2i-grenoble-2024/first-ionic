@@ -10,6 +10,10 @@
   <app-dog-card [dog]="item"></app-dog-card>
   }
 
+  <!-- Syntaxe historique. Y en a pas une mieux que l'autre, question de préférence -->
+  <!-- <app-dog-card [dog]="item" *ngFor="let item of dogs"></app-dog-card> -->
+
+
   <ion-fab horizontal="end" vertical="bottom" slot="fixed">
     <ion-fab-button id="open-modal">
       <ion-icon icon="add"></ion-icon>
@@ -32,6 +36,4 @@
     </ng-template>
   </ion-modal>
 
-  <!-- Syntaxe historique. Y en a pas une mieux que l'autre, question de préférence -->
-  <!-- <app-dog-card [dog]="item" *ngFor="let item of dogs"></app-dog-card> -->
 </ion-content>
