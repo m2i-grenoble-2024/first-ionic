@@ -6,7 +6,7 @@ import { Dog } from '../entities';
 import { DogService } from '../dog.service';
 import { DogCardComponent } from '../dog-card/dog-card.component';
 import { addIcons } from 'ionicons';
-import { add } from 'ionicons/icons';
+import { add, trash } from 'ionicons/icons';
 import { DogFormComponent } from "../dog-form/dog-form.component";
 
 @Component({
@@ -31,7 +31,7 @@ export class DogListPage implements OnInit {
   selected?:Dog;
 
   constructor(private dogService:DogService) {
-    addIcons({add})
+    addIcons({add, trash})
 
    }
 
@@ -52,6 +52,16 @@ export class DogListPage implements OnInit {
     } else {
       this.selected = dog;
     }
+  }
+
+  deleteDog() {
+    this.dogService.remove(this.selected?.id).subscribe(() => {
+      //On utilise un filter pour retirer le chien supprimé de la liste des chiens
+      this.dogs = this.dogs.filter(item => item.id != this.selected?.id);
+      //Si on veut pas faire un filter, on peut relancer le fetch pour re-récupérer la liste des chiens, c'est un poil moins optimisé, mais techniquement c'est plus "fiable"
+      // this.ngOnInit();
+      this.selected = undefined;
+    });
   }
 
 }

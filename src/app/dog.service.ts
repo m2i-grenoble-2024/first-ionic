@@ -17,4 +17,8 @@ export class DogService {
   add(dog:Dog) {
     return this.http.post<Dog>('http://localhost:8000/api/dog', dog);
   }
+
+  remove(id:any) {
+    return this.http.delete<void>('http://localhost:8000/api/dog/'+id);
+  }
 }

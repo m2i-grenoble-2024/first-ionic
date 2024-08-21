@@ -1,6 +1,11 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>DogList</ion-title>
+    <ion-buttons *ngIf="selected" slot="end">
+      <ion-button (click)="deleteDog()">
+        <ion-icon icon="trash"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
