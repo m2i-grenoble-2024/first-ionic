@@ -28,6 +28,8 @@ export class DogListPage implements OnInit {
     birthdate: '2024-01-01'
   }
 
+  selected?:Dog;
+
   constructor(private dogService:DogService) {
     addIcons({add})
 
@@ -39,6 +41,17 @@ export class DogListPage implements OnInit {
 
   postDog() {
     this.dogService.add(this.addDog).subscribe(data => this.dogs.push(data));
+  }
+  /**
+   * Sélectionne un chien, s'il est déjà sélectionné, le désélectionne
+   * @param dog Le chien à sélectionner
+   */
+  select(dog:Dog){
+    if(this.selected == dog) {
+      this.selected = undefined
+    } else {
+      this.selected = dog;
+    }
   }
 
 }

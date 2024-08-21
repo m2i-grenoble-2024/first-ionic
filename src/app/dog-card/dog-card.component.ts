@@ -14,6 +14,9 @@ export class DogCardComponent  implements OnInit {
   @Input({required:true})
   dog!:Dog;
 
+  @Input()
+  isSelected = false;
+
   constructor() { }
 
   ngOnInit() {}
