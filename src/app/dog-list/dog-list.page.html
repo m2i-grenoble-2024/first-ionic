@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>DogList</ion-title>
-    <ion-buttons *ngIf="selected" slot="end">
+    <ion-buttons *ngIf="selected.length" slot="end">
       <ion-button (click)="deleteDog()">
         <ion-icon icon="trash"></ion-icon>
       </ion-button>
@@ -12,7 +12,7 @@
 <ion-content [fullscreen]="true">
   <!-- Nouvelle syntaxe des for -->
   @for (item of dogs; track item.id) {
-    <app-dog-card [isSelected]="selected == item" (click)="select(item)" [dog]="item"></app-dog-card>
+    <app-dog-card [isSelected]="selected.includes(item)" (click)="select(item)" [dog]="item"></app-dog-card>
   }
 
   <!-- Syntaxe historique. Y en a pas une mieux que l'autre, question de préférence -->

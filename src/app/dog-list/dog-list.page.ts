@@ -28,7 +28,7 @@ export class DogListPage implements OnInit {
     birthdate: '2024-01-01'
   }
 
-  selected?:Dog;
+  selected:Dog[] = [];
 
   constructor(private dogService:DogService) {
     addIcons({add, trash})
@@ -47,21 +47,24 @@ export class DogListPage implements OnInit {
    * @param dog Le chien à sélectionner
    */
   select(dog:Dog){
-    if(this.selected == dog) {
-      this.selected = undefined
+    if(this.selected.includes(dog)) {
+      this.selected = this.selected.filter(item => item.id != dog.id);
     } else {
-      this.selected = dog;
+      this.selected.push(dog);
     }
   }
 
   deleteDog() {
-    this.dogService.remove(this.selected?.id).subscribe(() => {
-      //On utilise un filter pour retirer le chien supprimé de la liste des chiens
-      this.dogs = this.dogs.filter(item => item.id != this.selected?.id);
-      //Si on veut pas faire un filter, on peut relancer le fetch pour re-récupérer la liste des chiens, c'est un poil moins optimisé, mais techniquement c'est plus "fiable"
-      // this.ngOnInit();
-      this.selected = undefined;
-    });
+    for (const dog of this.selected) {
+      
+      this.dogService.remove(dog.id).subscribe(() => {
+        //On utilise un filter pour retirer le chien supprimé de la liste des chiens
+        this.dogs = this.dogs.filter(item => item.id != dog.id);
+        //Si on veut pas faire un filter, on peut relancer le fetch pour re-récupérer la liste des chiens, c'est un poil moins optimisé, mais techniquement c'est plus "fiable"
+        // this.ngOnInit();
+        this.select(dog);
+      });
+    }
   }
 
 }
