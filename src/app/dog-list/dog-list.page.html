@@ -5,6 +5,9 @@
       <ion-button (click)="deleteDog()">
         <ion-icon icon="trash"></ion-icon>
       </ion-button>
+      <ion-button (click)="modal.present()">
+        <ion-icon icon="create"></ion-icon>
+      </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -20,7 +23,7 @@
 
 
   <ion-fab horizontal="end" vertical="bottom" slot="fixed">
-    <ion-fab-button id="open-modal">
+    <ion-fab-button id="open-modal" (click)="selected = undefined">
       <ion-icon icon="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
@@ -29,14 +32,16 @@
     <ng-template>
       <ion-header>
         <ion-toolbar>
-          <ion-title>Add Dog</ion-title>
+          <ion-title *ngIf="selected">Edit Dog</ion-title>
+          <ion-title *ngIf="!selected">Add Dog</ion-title>
           <ion-buttons slot="end">
             <ion-button (click)="modal.dismiss()">Cancel</ion-button>
           </ion-buttons>
         </ion-toolbar>
       </ion-header>
       <ion-content>
-        <app-dog-form [toEdit]="addDog" (apply)="postDog(); modal.dismiss()"></app-dog-form>
+        <app-dog-form *ngIf="!selected" [toEdit]="addDog" (apply)="postDog(); modal.dismiss()"></app-dog-form>
+        <app-dog-form *ngIf="selected" [toEdit]="selected" (apply)="updateDog(); modal.dismiss()"></app-dog-form>
       </ion-content>
     </ng-template>
   </ion-modal>

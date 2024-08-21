@@ -6,7 +6,7 @@ import { Dog } from '../entities';
 import { DogService } from '../dog.service';
 import { DogCardComponent } from '../dog-card/dog-card.component';
 import { addIcons } from 'ionicons';
-import { add, trash } from 'ionicons/icons';
+import { add, create, trash } from 'ionicons/icons';
 import { DogFormComponent } from "../dog-form/dog-form.component";
 
 @Component({
@@ -31,7 +31,7 @@ export class DogListPage implements OnInit {
   selected?:Dog;
 
   constructor(private dogService:DogService) {
-    addIcons({add, trash})
+    addIcons({add, trash, create})
 
    }
 
@@ -62,6 +62,12 @@ export class DogListPage implements OnInit {
       // this.ngOnInit();
       this.selected = undefined;
     });
+  }
+
+  updateDog() {
+    if(this.selected) {
+      this.dogService.update(this.selected).subscribe();
+    }
   }
 
 }
